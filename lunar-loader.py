@@ -134,13 +134,14 @@ class LoaderWindow(QWidget):
                 return
 
     def on_done(self, code):
-        if not self.failed:
-            if code == 0:
-                self.status.setText("Session ended. Closing...")
-            else:
-                self.status.setText(f"Loader exited with code {code}. Closing...")
-        self.btn.setText("Close")
-        QTimer.singleShot(1500, QApplication.quit)
+        if not self.failed and code == 0:
+            self.status.setText("Session ended. Closing...")
+            self.btn.setText("Close")
+            QTimer.singleShot(1500, QApplication.quit)
+        else:
+            if not self.failed:
+                self.status.setText(f"Loader exited with code {code}")
+            self.btn.setText("Close")
 
     def cancel(self):
         if self.worker.isRunning():

@@ -28,3 +28,5 @@ manifest.txt
 game-output.log
 config_info
 game.log
+# AppImage build artifacts
+Lunar-Vape-Loader-x86_64.AppImage
