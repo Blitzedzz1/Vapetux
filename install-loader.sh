@@ -27,7 +27,7 @@ mkdir -p "$(dirname "$DESKTOP")"
 cat > "$DESKTOP" << EOF
 [Desktop Entry]
 Type=Application
-Name=Lunar Client + Vape Loader
+Name=Vapetux
 Comment=Launch Lunar Client (Windows) via Proton and inject Vape V4
 Exec=python3 $LOADER
 Icon=applications-games

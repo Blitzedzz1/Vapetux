@@ -3,7 +3,7 @@
 set -e
 
 DIR="$(cd "$(dirname "$0")" && pwd)"
-OUT="$DIR/Lunar-Vape-Loader-x86_64.AppImage"
+OUT="$DIR/Vapetux-x86_64.AppImage"
 APPDIR="/tmp/lunar-vape-loader.AppDir"
 TOOL="/tmp/appimagetool"
 
@@ -69,7 +69,7 @@ PYEOF
 cat > "$APPDIR/lunar-vape-loader.desktop" << 'EOF'
 [Desktop Entry]
 Type=Application
-Name=Lunar Client + Vape Loader
+Name=Vapetux
 Comment=Launch Lunar Client (Windows) via Proton and inject Vape V4
 Exec=lunar-vape-loader
 Icon=lunar-vape-loader
@@ -77,6 +77,7 @@ Terminal=false
 Categories=Game;
 EOF
 
+cd /tmp
 "$TOOL" --appimage-extract-and-run --no-appstream "$APPDIR"
-mv /tmp/Lunar_Client_+_Vape_Loader-x86_64.AppImage "$OUT"
+mv /tmp/Vapetux-x86_64.AppImage "$OUT"
 echo "Built: $OUT"

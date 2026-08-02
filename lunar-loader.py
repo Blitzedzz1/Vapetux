@@ -71,7 +71,7 @@ class ScriptWorker(QThread):
 class LoaderWindow(QWidget):
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("Lunar Client + Vape Loader")
+        self.setWindowTitle("Vapetux")
         self.setMinimumSize(520, 320)
 
         layout = QVBoxLayout(self)

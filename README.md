@@ -1,4 +1,4 @@
-# Lunar Client + Vape V4 Loader for Linux
+# Vapetux
 
 Launch Lunar Client (Windows build) on Linux through Proton 9.0 and auto-inject Vape V4 once the game has fully initialized.
 
@@ -53,7 +53,7 @@ CLI:
 GUI:
 
 ```
-./install-loader.sh        # registers a desktop entry
+././install-loader.sh       # registers a desktop entry
 python3 lunar-loader.py    # or launch "Lunar Client + Vape Loader" from your app menu
 ```
 

@@ -45,7 +45,7 @@ sudo dnf install libarchive curl python3-pyqt6
 ## 3. Get the loader
 
 ```
-git clone <this-repo-url> && cd lunar-vape-loader
+git clone <this-repo-url> && cd Vapetux
 ```
 
 ## 4. Place your Vape DLL
