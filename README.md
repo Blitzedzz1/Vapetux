@@ -1,6 +1,6 @@
 # Vapetux
 
-Launch Lunar Client (Windows build) on Linux through Proton 9.0 and auto-inject Vape V4 once the game has fully initialized.
+Launch Lunar Client (Windows build) on Linux through Proton 9.0 and auto-inject any Vape V4 DLL once the game has fully initialized.
 
 ## What it does
 
@@ -8,7 +8,7 @@ Launch Lunar Client (Windows build) on Linux through Proton 9.0 and auto-inject 
 2. Launches it through Steam Proton 9.0 (Beta).
 3. Waits for the game process (`javaw.exe`) to spawn, then kills the launcher to free RAM.
 4. Waits for the game's init log line (`Lunar took Xms to initialize`) so injection only happens once the game is ready.
-5. Injects `VapeV4.21.dll` via `CreateRemoteThread` into `javaw.exe`.
+5. Injects the found Vape DLL (any `*.dll` next to the scripts, or `VAPE_DLL`) via `CreateRemoteThread` into `javaw.exe`.
 6. Monitors the session and exits when the game closes.
 
 Two UIs:
@@ -37,7 +37,7 @@ sudo dnf install libarchive curl python3-pyqt6
 ## Setup
 
 1. Enable **Proton 9.0 (Beta)** in Steam: Settings → Compatibility → tick "Enable Steam Play", select Proton 9.0.
-2. Place your `VapeV4.21.dll` next to the scripts (or export `VAPE_DLL=/path/to/VapeV4.21.dll`).
+2. Place any Vape V4 DLL next to the scripts — the loader auto-detects `*.dll` files (or export `VAPE_DLL=/path/to/vape.dll`).
 3. Run the loader. In the Lunar launcher, log in and press Play.
 
 You only need a Steam client with Proton installed — no Steam game is required, the prefix is created automatically.
@@ -61,7 +61,7 @@ Environment variables:
 
 | Variable | Default | Description |
 |---|---|---|
-| `VAPE_DLL` | `./VapeV4.21.dll` | Path to the Vape V4 DLL |
+| `VAPE_DLL` | auto-detected | Path to the Vape DLL (any `*.dll` in the script dir is found automatically) |
 | `INJECTOR_SO` | `./injector.exe.so` | Path to the Winelib injector |
 
 ## Layout

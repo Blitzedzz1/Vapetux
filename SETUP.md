@@ -50,14 +50,15 @@ git clone <this-repo-url> && cd Vapetux
 
 ## 4. Place your Vape DLL
 
-You must already own Vape V4 (from vape.gg — it is paid software, this repo does not contain it).
+You must already own Vape V4 (from vape.gg — it is paid software, this repo does not contain it). Any DLL version works.
 
 ```
 # either: put it next to the scripts
+# any name works - the loader auto-detects *.dll
 cp VapeV4.21.dll .
 
 # or: point the loader at it
-export VAPE_DLL=/path/to/your/VapeV4.21.dll
+export VAPE_DLL=/path/to/your/vape.dll
 ```
 
 ## 5. First run (CLI)
@@ -71,7 +72,7 @@ What happens on first run:
 2. The Lunar launcher window opens — **log in with your Lunar account** (same account you use on Windows).
 3. Click **Play** on the 1.8.9 version.
 4. The loader detects `javaw.exe`, kills the launcher, waits for the game to initialize, then injects Vape.
-5. Output ends with `[lunar-vape] Vape V4 injected.` — in-game, open Vape with **Right Shift** (default keybind).
+5. Output ends with `[lunar-vape] Vape DLL injected.` — in-game, open Vape with **Right Shift** (default keybind).
 
 ## 6. GUI loader (optional but recommended)
 

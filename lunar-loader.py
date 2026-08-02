@@ -14,7 +14,7 @@ APP_DIR = os.path.dirname(os.path.abspath(__file__))
 MAIN_SCRIPT = os.path.join(APP_DIR, "lunar-install.sh")
 
 STAGES = [
-    (re.compile(r"staged in prefix"),          5,  "Vape DLL staged"),
+    (re.compile(r"Vape DLL staged in prefix"),          5,  "Vape DLL staged"),
     (re.compile(r"Launching Lunar Client"),   10,  "Launching launcher..."),
     (re.compile(r"Launcher started"),         15,  "Launcher started"),
     (re.compile(r"Waiting for the game to launch"), 25, "Waiting for game launch..."),
@@ -26,9 +26,9 @@ STAGES = [
     (re.compile(r"Still waiting for the game to initialize"), 68, "Game still initializing..."),
     (re.compile(r"Game initialized"),         75,  "Game initialized"),
     (re.compile(r"Waiting 3s"),               80,  "Safe injection delay..."),
-    (re.compile(r"Injecting Vape"),           85,  "Injecting Vape V4..."),
+    (re.compile(r"Injecting Vape"),           85,  "Injecting Vape DLL..."),
     (re.compile(r"LoadLibrary returned"),     90,  "DLL loaded"),
-    (re.compile(r"Vape V4 injected"),         95,  "Vape V4 injected"),
+    (re.compile(r"Vape DLL injected"),         95,  "Vape DLL injected"),
     (re.compile(r"Monitoring game session"),  100, "Session active"),
     (re.compile(r"Game running"),             100, "Session active"),
 ]

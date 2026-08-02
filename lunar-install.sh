@@ -7,8 +7,16 @@ LAUNCHER_DIR="$WINEPREFIX/drive_c/lunar-launcher"
 LAUNCHER_EXE_WIN="C:\\lunar-launcher\\Lunar Client.exe"
 PAYLOAD_7Z="$LUNAR_DIR/lunarclient-3.4.9-x64.nsis.7z"
 PAYLOAD_URL="https://launcherupdates.lunarclientcdn.com/lunarclient-3.4.9-x64.nsis.7z"
-VAPE_DLL="${VAPE_DLL:-$SCRIPT_DIR/VapeV4.21.dll}"
+VAPE_DLL="${VAPE_DLL:-}"
 INJECTOR_SO="${INJECTOR_SO:-$SCRIPT_DIR/injector.exe.so}"
+
+find_vape_dll() {
+    if [ -n "$VAPE_DLL" ] && [ -f "$VAPE_DLL" ]; then
+        return 0
+    fi
+    VAPE_DLL="$(find "$SCRIPT_DIR" -maxdepth 1 -iname "*.dll" ! -iname "injector*" 2>/dev/null | head -1)"
+    [ -n "$VAPE_DLL" ] && [ -f "$VAPE_DLL" ]
+}
 
 PROTON="$(ls "$HOME/.steam/steam/steamapps/common/Proton 9.0 (Beta)/proton" \
               "$HOME/.steam/steam/steamapps/common/Proton 9.0/proton" \
@@ -40,15 +48,16 @@ install_launcher() {
 }
 
 setup_vape() {
-    if [ ! -f "$VAPE_DLL" ]; then
-        echo "ERROR: Vape DLL not found at $VAPE_DLL"
-        echo "Set VAPE_DLL=/path/to/VapeV4.21.dll or place it next to this script."
+    if ! find_vape_dll; then
+        echo "ERROR: No Vape DLL found."
+        echo "Place any Vape V4 DLL next to this script (e.g. VapeV4.21.dll)"
+        echo "or set VAPE_DLL=/path/to/vape-v4.dll"
         exit 1
     fi
     mkdir -p "$WINEPREFIX/drive_c"
-    cp -f "$VAPE_DLL" "$WINEPREFIX/drive_c/VapeV4.21.dll"
+    cp -f "$VAPE_DLL" "$WINEPREFIX/drive_c/vape-v4.dll"
     cp -f "$INJECTOR_SO" "$WINEPREFIX/drive_c/injector.exe.so"
-    say "Vape V4.21.dll and injector staged in prefix."
+    say "Vape DLL staged in prefix: $(basename "$VAPE_DLL")"
 }
 
 GAME_LOG="$WINEPREFIX/drive_c/users/steamuser/.lunarclient/offline/multiver/logs/latest.log"
@@ -110,11 +119,11 @@ wait_for_game_init() {
 }
 
 inject_vape() {
-    say "Injecting Vape V4 into javaw.exe..."
+    say "Injecting Vape DLL into javaw.exe..."
     export WINEPREFIX="$WINEPREFIX"
     export WINEFSYNC=1
     export WINEDLLPATH="$(dirname "$INJECTOR_SO")"
-    timeout 90 "$WINE_BIN" "$INJECTOR_SO" "C:\\VapeV4.21.dll" javaw 2>&1 \
+    timeout 90 "$WINE_BIN" "$INJECTOR_SO" "C:\\vape-v4.dll" javaw 2>&1 \
         | grep -viE "writewatch|fsync" | sed 's/^/[injector] /'
     return ${PIPESTATUS[0]}
 }
@@ -138,7 +147,7 @@ if wait_for_game_process; then
         say "Waiting 3s for safe injection..."
         sleep 3
         if inject_vape; then
-            say "Vape V4 injected. Open the menu with your Vape keybind (Right Shift by default)."
+            say "Vape DLL injected. Open the menu with your Vape keybind (Right Shift by default)."
         else
             echo "Injection failed (see output above)."
         fi
