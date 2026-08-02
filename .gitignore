@@ -1,0 +1,30 @@
+# Paid/proprietary - never commit
+VapeV4.21.dll
+*.dll
+
+# Old experimental files from the hybrid-launcher approach
+ArgTracer.java
+FixUnixAgent.class
+FixUnixAgent.java
+fix-selector-agent.jar
+fix-unix-agent.jar
+a.out
+webosr.dll
+com/
+META-INF/
+.ichor/
+win-natives/
+overrides/
+squashfs-root/
+logs/
+manifest.txt
+"Lunar Client.dxvk-cache"
+
+# Backups
+*.backup
+*.bak
+
+# Local state
+game-output.log
+config_info
+game.log
